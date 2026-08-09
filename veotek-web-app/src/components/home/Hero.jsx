@@ -131,14 +131,14 @@ const imageVariants = {
 
 const headingLetterVariants = {
   hidden: {
-    opacity: 0,
-    y: 16,
-    filter: "blur(4px)",
+    opacity: 1,
+    y: 0,
   },
+
   visible: (index) => ({
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
+
     transition: {
       duration: 0.34,
       delay: 0.38 + index * 0.022,
@@ -157,7 +157,7 @@ function HeroEyebrow({ prefersReducedMotion }) {
   return (
     <motion.div
       variants={contentVariants}
-      initial={prefersReducedMotion ? false : "hidden"}
+      initial={false}
       animate="visible"
       transition={{ duration: 0.5, ease: premiumEase }}
       className="
@@ -270,7 +270,7 @@ function HeroHeading({ prefersReducedMotion }) {
                   key={`${line.id}-${segmentIndex}-${animationIndex}`}
                   custom={animationIndex}
                   variants={headingLetterVariants}
-                  initial={prefersReducedMotion ? false : "hidden"}
+                  initial={false}
                   animate="visible"
                   className="inline-block"
                   style={{
@@ -296,11 +296,11 @@ function CapabilityLink({ capability, index, isActive }) {
   const CapabilityIcon = capability.icon;
 
   const responsiveBorders = [
-  "",
-  "border-t sm:border-l sm:border-t-0 lg:border-l",
-  "border-t lg:border-l lg:border-t-0",
-  "border-t sm:border-l lg:border-l lg:border-t-0",
-][index];
+    "",
+    "border-t sm:border-l sm:border-t-0 lg:border-l",
+    "border-t lg:border-l lg:border-t-0",
+    "border-t sm:border-l lg:border-l lg:border-t-0",
+  ][index];
 
   return (
     <Link
@@ -405,12 +405,13 @@ export default function Hero() {
     <section
       aria-labelledby="hero-heading"
       className="
-        relative
-        isolate
-        min-h-[100svh]
-        overflow-hidden
-        bg-[#030311]
-        pt-24
+  relative
+  isolate
+  min-h-screen
+  min-h-[100svh]
+  overflow-hidden
+  bg-[#030311]
+  pt-24
 
         sm:pt-28
 
@@ -421,15 +422,17 @@ export default function Hero() {
     >
       {/* Base background */}
       <div
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          -z-30
-          bg-[#030311]
-        "
-        aria-hidden="true"
-      />
+  className="
+    pointer-events-none
+    absolute
+    inset-0
+    hidden
+    bg-cyan-950/10
+    mix-blend-color
+    sm:block
+  "
+  aria-hidden="true"
+/>
 
       {/* Background lighting */}
       <div
@@ -444,41 +447,61 @@ export default function Hero() {
       >
         <div
           className="
-            absolute
-            -left-40
-            top-[-10rem]
-            h-[35rem]
-            w-[35rem]
-            rounded-full
-            bg-cyan-500/[0.12]
-            blur-[160px]
-          "
+    absolute
+    -left-20
+    top-[-5rem]
+    h-[20rem]
+    w-[20rem]
+    rounded-full
+    bg-cyan-500/[0.10]
+    blur-[80px]
+
+    sm:-left-40
+    sm:top-[-10rem]
+    sm:h-[35rem]
+    sm:w-[35rem]
+    sm:bg-cyan-500/[0.12]
+    sm:blur-[160px]
+  "
         />
 
         <div
           className="
-            absolute
-            right-[-12rem]
-            top-[20%]
-            h-[34rem]
-            w-[34rem]
-            rounded-full
-            bg-indigo-500/[0.12]
-            blur-[170px]
-          "
+    absolute
+    right-[-6rem]
+    top-[20%]
+    h-[20rem]
+    w-[20rem]
+    rounded-full
+    bg-indigo-500/[0.10]
+    blur-[80px]
+
+    sm:right-[-12rem]
+    sm:h-[34rem]
+    sm:w-[34rem]
+    sm:bg-indigo-500/[0.12]
+    sm:blur-[170px]
+  "
         />
 
         <div
           className="
-            absolute
-            bottom-[-18rem]
-            left-[35%]
-            h-[32rem]
-            w-[32rem]
-            rounded-full
-            bg-purple-500/[0.08]
-            blur-[170px]
-          "
+    absolute
+    bottom-[-10rem]
+    left-[30%]
+    h-[18rem]
+    w-[18rem]
+    rounded-full
+    bg-purple-500/[0.07]
+    blur-[80px]
+
+    sm:bottom-[-18rem]
+    sm:left-[35%]
+    sm:h-[32rem]
+    sm:w-[32rem]
+    sm:bg-purple-500/[0.08]
+    sm:blur-[170px]
+  "
         />
       </div>
 
@@ -508,7 +531,7 @@ export default function Hero() {
         {/* Main photography area */}
         <motion.div
           variants={imageVariants}
-          initial={prefersReducedMotion ? false : "hidden"}
+          initial={false}
           animate="visible"
           transition={{
             duration: 0.85,
@@ -650,27 +673,14 @@ export default function Hero() {
 
           {/* Development team image */}
           <motion.figure
-            animate={
-              prefersReducedMotion
-                ? undefined
-                : {
-                    y: [0, -8, 0],
-                  }
-            }
-            transition={
-              prefersReducedMotion
-                ? undefined
-                : {
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }
-            }
+            initial={false}
             className="
-              absolute
-              bottom-4
-              left-4
-              z-30
+  hidden
+  sm:block
+  absolute
+  bottom-4
+  left-4
+  z-30
               w-[38%]
               max-w-[21rem]
               overflow-hidden
@@ -740,28 +750,14 @@ export default function Hero() {
 
           {/* Project planning image */}
           <motion.figure
-            animate={
-              prefersReducedMotion
-                ? undefined
-                : {
-                    y: [0, 7, 0],
-                  }
-            }
-            transition={
-              prefersReducedMotion
-                ? undefined
-                : {
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.7,
-                  }
-            }
+            initial={false}
             className="
-              absolute
-              right-4
-              top-4
-              z-30
+  hidden
+  sm:block
+  absolute
+  right-4
+  top-4
+  z-30
               w-[38%]
               max-w-[21rem]
               overflow-hidden
@@ -815,28 +811,18 @@ export default function Hero() {
               />
 
               <div
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-                  bg-gradient-to-t
-                  from-[#030311]/50
-                  via-transparent
-                  to-transparent
-                "
-                aria-hidden="true"
-              />
+  className="
+    pointer-events-none
+    absolute
+    inset-0
+    hidden
+    bg-cyan-950/10
+    mix-blend-color
+    sm:block
+  "
+  aria-hidden="true"
+/>
 
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-                  bg-cyan-950/10
-                  mix-blend-color
-                "
-                aria-hidden="true"
-              />
             </div>
           </motion.figure>
         </motion.div>
@@ -845,7 +831,7 @@ export default function Hero() {
         <motion.nav
           aria-label="Software development capabilities"
           variants={contentVariants}
-          initial={prefersReducedMotion ? false : "hidden"}
+          initial={false}
           animate="visible"
           transition={{
             duration: 0.65,
@@ -873,7 +859,7 @@ export default function Hero() {
             lg:rounded-3xl
           "
         >
-         <div className="col-span-full flex items-center justify-center gap-3 px-6 py-4">
+          <div className="col-span-full flex items-center justify-center gap-3 px-6 py-4">
             <Layers3 size={20} className="text-cyan-300" aria-hidden="true" />
 
             <span className="text-sm font-bold uppercase tracking-wide text-cyan-300">
