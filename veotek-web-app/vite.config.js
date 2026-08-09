@@ -5,21 +5,23 @@ import legacy from "@vitejs/plugin-legacy";
 export default defineConfig({
   plugins: [
     react(),
+
     legacy({
       targets: [
+        "iOS >= 13",
+        "Safari >= 13",
+        "Android >= 8",
         "defaults",
         "not IE 11",
-        "Android >= 8",
-        "iOS >= 12",
-        "Safari >= 12",
       ],
+
       modernPolyfills: true,
     }),
   ],
 
   build: {
-  cssCodeSplit: true,
-  sourcemap: false,
-  chunkSizeWarningLimit: 700,
-},
+    cssCodeSplit: true,
+    sourcemap: false,
+    chunkSizeWarningLimit: 700,
+  },
 });
