@@ -175,8 +175,10 @@ export default function TestimonialCarousel({
 
   const [isPaused, setIsPaused] = useState(false);
 
-  const safeTestimonials = Array.isArray(testimonials) ? testimonials : [];
-
+const safeTestimonials = useMemo(
+  () => (Array.isArray(testimonials) ? testimonials : []),
+  [testimonials],
+);
   const testimonialCount = safeTestimonials.length;
 
   const actualVisibleCount = Math.min(visibleCount, testimonialCount);
