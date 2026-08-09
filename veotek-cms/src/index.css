@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root{
+    height:100%;
+}
+
+body{
+    margin:0;
+    background:#030311;
+    color:#F5F7FF;
+    font-family:Inter,sans-serif;
+}
+
+*{
+    box-sizing:border-box;
+}
